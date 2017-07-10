@@ -1,0 +1,32 @@
+http://bbs.springcloud.com.cn/d/2-dd-spring-boot
+测试不同配置的加载
+
+执行java -jar xxx.jar，可以观察到服务端口被设置为8011，也就是默认的开发环境（dev）
+执行java -jar xxx.jar --spring.profiles.active=test，可以观察到服务端口被设置为8012，也就是测试环境的配置（test）
+执行java -jar xxx.jar --spring.profiles.active=prod，可以观察到服务端口被设置为8013，也就是生产环境的配置（prod
+
+# 日志
+控制台输出
+
+在Spring Boot中默认配置了ERROR、WARN和INFO级别的日志输出到控制台。
+
+，并不会记录到文件中，但是我们通常生产环境使用时都需要以文件方式记录。
+
+若要增加文件输出，需要在application.properties中配置logging.file或logging.path属性。
+
+logging.file，设置文件，可以是绝对路径，也可以是相对路径。如：logging.file=my.log
+logging.path，设置目录，会在该目录下创建spring.log文件，并写入日志内容，如：logging.path=/var/log
+日志文件会在10Mb大小的时候被截断，产生新的日志文件，默认级别为：ERROR、WARN、INFO
+
+级别控制
+
+在Spring Boot中只需要在application.properties中进行配置完成日志记录的级别控制。
+
+配置格式：logging.level.*=LEVEL
+
+logging.level：日志级别控制前缀，*为包名或Logger名
+LEVEL：选项TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF
+举例：
+
+logging.level.com.didispace=DEBUG：com.didispace包下所有class以DEBUG级别输出
+logging.level.root=WARN：root日志以WARN级别输出
